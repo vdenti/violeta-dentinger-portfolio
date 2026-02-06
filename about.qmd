@@ -2,8 +2,4 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+I am a first year student at California State University Monterey Bay. I am majoring in mathematics and currently taking STAT 210, Statistical Computing with R.
