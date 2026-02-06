@@ -1,6 +1,22 @@
 ---
-title: "violeta-dentinger-portfolio"
+title: "Violeta Dentinger"
+about:
+  template: jolla
+  image: oak-tree.jpg
+  image-alt: An oak tree with a dew covered spider web
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/vdenti/
 ---
+
+Violeta Dentinger is a freshman at California State University Monterey Bay.
+
+## Education
+
+Violeta Dentinger is currently majoring in mathematics at California State University Monterey Bay.
+
+## Experiance
 
 This is a Quarto website.
 
