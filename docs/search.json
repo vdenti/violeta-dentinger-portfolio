@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Violeta Dentinger",
+    "section": "",
+    "text": "Violeta Dentinger is a freshman at California State University Monterey Bay."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Violeta Dentinger",
+    "section": "Education",
+    "text": "Education\nVioleta Dentinger is currently majoring in mathematics at California State University Monterey Bay."
+  },
+  {
+    "objectID": "index.html#experiance",
+    "href": "index.html#experiance",
+    "title": "Violeta Dentinger",
+    "section": "Experiance",
+    "text": "Experiance\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am a first year student at California State University Monterey Bay. I am majoring in mathematics and currently taking STAT 210, Statistical Computing with R."
+  }
+]
