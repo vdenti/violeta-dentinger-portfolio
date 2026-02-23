@@ -17,11 +17,3 @@ Violeta Dentinger is a freshman at California State University Monterey Bay.
 Violeta Dentinger is currently majoring in mathematics at California State University Monterey Bay.
 
 ## Experiance
-
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
