@@ -2,13 +2,175 @@
 title: "Waste Disposal Visualizations"
 ---
 
-## Describing data
+## Describing Data
 
 1.  The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. It is found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. This data is called `CountywideSummary.xlsx` The county wide disposal summary for Monterey county contains the variables Report Year; Report Quarter, which lists each of the four quarters of the year and is broken down in to cities with in Monterey county; Disposal Ton, the amount of waste produced within a city within that time period; Export Ton; Transformation Ton; and Total ADC, ADC stands for alternate daily cover which is material other than soil used to cover a landfill.
 
     The second data source (broken in to two tables) is from the US Census Bureau QuickFacts table. It contains some estimates from vintage year 2024 and 2025 other years date back to 2010. The Census data is from the 2010 Census of Population and Housing and the 2020 Census of Population and Housing. Other data comes from a variety of sources. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224). This data is called `QuickFacts Mar-22-2026 (1).csv` and `QuickFacts Mar-22-2026.csv` The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA. The variables are Fact, which contains the name of the statistic listed; Fact Note; city name for each city, which contains the value for the respective fact; and Value Note for each city.
 
 ## Data Cleaning
+
+```{r}
+#| label: setup-data-cleaning
+#| eval: false
+#| include: false
+#loading all required packages
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+#| label: read-data-data-cleaning
+#| eval: false
+#| include: false
+#reading in all data sets that will be used
+
+waste_summary <- read_xlsx("data-raw/CountywideSummary.xlsx", skip = 3)
+
+population_data_a <- read_csv("data-raw/QuickFacts Mar-22-2026.csv")
+
+population_data_b <- read_csv("data-raw/QuickFacts Mar-22-2026 (1).csv")
+
+```
+
+```{r}
+#| label: creating-data-set-population-data-cleaning
+#| eval: false
+#| include: false
+
+#Start of cleaning population data
+
+#creating a single population data set with all cites and only rows that may be later used for this project
+
+population_data_1 <- population_data_a |>
+  drop_na("Fact") |>
+  left_join(population_data_b, "Fact") |>
+  select(-contains("Note")) |>
+  filter(Fact %in% c("Population, Census, April 1, 2010", "Population per square mile, 2010"))
+
+#Choosing to use data from 2010 census instead of 2020 census because 2010 is more in the middle of waste summary range.
+
+```
+
+```{r}
+#| label: pivoting-population-data-cleaning
+#| eval: false
+#| include: false
+#pivoting the data so that there is a city column that will match with the city column in the waste data set 
+
+population_data_2 <- population_data_1 |> 
+  pivot_longer(cols = -Fact, names_to = "city-ca", values_to = "value") |>
+  pivot_wider(names_from = Fact, values_from = value) |>
+  janitor::clean_names()
+```
+
+```{r}
+#| label: adjusting-city-names-population-data-cleaning
+#| eval: false
+#| include: false
+#making the city column have the same format for city names as the waste data set so that joining the data sets will be possible. This means removing the " city, California" 
+population_data_3 <- population_data_2 |>
+  mutate(city = str_sub(city_ca, end = -18)) |>
+  select(-city_ca)
+```
+
+```{r}
+#| label: making-cols-numeric-population-data-cleaning
+#| eval: false
+#| include: false
+#also making the columns read as numbers to be able to do calculations with them later.
+population_data_4 <- population_data_3 |>
+  mutate(population_census_april_1_2010 = parse_number(population_census_april_1_2010), population_per_square_mile_2010 = parse_number(population_per_square_mile_2010))
+```
+
+```{r}
+#| label: solving-nas-names-waste-data-cleaning
+#| eval: false
+#| include: false
+#start of cleaning waste data
+#filling in the empty rows with the date because the date was only placed in one row and also cleaning the names to make it easier to work with
+
+waste_summary_1 <- waste_summary |>
+  select(1:3) |>
+  fill(1) |>
+  janitor::clean_names() |>
+  rename(disposal_ton = diposal_ton)
+#assuming spelling mistake in diposal and changing to disposal
+```
+
+
+```{r}
+#| label: waste-quarter-data-cleaning
+#| eval: false
+#| include: false
+#pulling the information on quarter out of column 2 and into a separate column
+
+waste_summary_2 <- waste_summary_1 |>
+  mutate(quarter = as.numeric(report_quarter)) |>
+  fill(4)
+```
+
+```{r}
+#| label: removing-extra-waste-col-2-data-cleaning
+#| eval: false
+#| include: false
+#taking out the information that is stored under year and quarter but not linked to a specific city as it is not needed.
+waste_summary_3 <- waste_summary_2 |>
+  drop_na(report_quarter) |>
+  filter(!report_quarter %in% c(1, 2, 3, 4)) |>
+  rename(city = report_quarter)
+```
+
+```{r}
+#| label: waste-year-quarter-data-cleaning
+#| eval: false
+#| include: false
+#making the quarter and year column be combined so that they are one variable to make a continuous time scale that is able to be graphed. Graphing each quarter as the start of that quarter of a year.
+
+waste_summary_4 <- waste_summary_3 |>
+  mutate(time = report_year + ((quarter -1) / 4)) |>
+  select(-report_year, -quarter)
+# this is that data set that will be used for q3
+
+#All quarters are displayed as being at the start of that fourth of the year.
+```
+
+```{r}
+#| label: combining-data-waste-population-data-cleaning
+#| eval: false
+#| include: false
+#combining the two data sets for q1 and q2 with eventual goal of creating per population variable
+
+waste_population_2010_city_over_5000_1 <- waste_summary_4 |>
+  left_join(population_data_4, by = join_by(city)) |>
+  drop_na(population_census_april_1_2010) 
+```
+
+```{r}
+#| label: waste-population-creating-per-population-variable-data-cleaning
+#| eval: false
+#| include: false
+#creating a variable that involves waste per population for q1 and q2
+
+waste_population_2010_city_over_5000_2 <- waste_population_2010_city_over_5000_1 |>
+  mutate(disposal_per_population_ton = (disposal_ton / population_census_april_1_2010))
+```
+
+```{r}
+#| label: writing-data-1-2-data-cleaning
+#| eval: false
+#| include: false
+#writing the data that will be used for questions 1 and 2
+write_csv(waste_population_2010_city_over_5000_2, "data-clean/waste-population-q1-q2")
+```
+
+```{r}
+#| label: writing-data-3-data-cleaning
+#| eval: false
+#| include: false
+#writing the data that will be used to answer question 3, in the long data format to allow for the use of grouping.
+write_csv(waste_summary_4, "data-clean/waste-summary-q3")
+```
 
 The population data sets were combined and the orientation switched to be easier to work with. The city names were simplified and column types were changed. For the waste data set missing values for year were fixed as one year corresponded to several rows. Information on quarter was extracted from the Report Quarter variable and values for quarter and yearly totals were dropped. Quarter was combined with year to allow for a continuous time scale, such that each quarter is displayed as the start of that fourth of the year (ex. quarter 2, 1995 becomes 1995.25). The two data sets were combined and only census data for 2010 was kept for city population and population density per square mile. 2010 data was chosen over 2020 data because waste data only goes to 2019. Waste generation per person was calculated by dividing the waste generation for a city by the population in 2010 of that city.
 
@@ -25,8 +187,8 @@ library(tidyverse)
 #| label: reading-data
 #| include: false
 #reading in all of the cleaned data
-waste_population_q1_q2 <-read_csv("visualizations-page/data-clean/waste-population-q1-q2")
-waste_summary_q3 <- read_csv("visualizations-page/data-clean/waste-summary-q3")
+waste_population_q1_q2 <-read_csv("data-clean/waste-population-q1-q2")
+waste_summary_q3 <- read_csv("data-clean/waste-summary-q3")
 ```
 
 ### How has waste generation changed from 1995 in Monterey County?
