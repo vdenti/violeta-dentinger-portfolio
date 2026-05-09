@@ -1,11 +1,12 @@
 ---
-title: "visualizations-page"
+title: "Waste Disposal Visualizations"
 ---
+
 ## Describing data
 
-1.  The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. It is found at <https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary> on Cal Recycle's website. This data is called `CountywideSummary.xlsx` The county wide disposal summary for Monterey county contains the variables Report Year; Report Quarter, which lists each of the four quarters of the year and is broken down in to cities with in Monterey county; Disposal Ton, the amount of waste produced within a city within that time period; Export Ton; Transformation Ton; and Total ADC, ADC stands for alternate daily cover which is material other than soil used to cover a landfill.
+1.  The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. It is found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. This data is called `CountywideSummary.xlsx` The county wide disposal summary for Monterey county contains the variables Report Year; Report Quarter, which lists each of the four quarters of the year and is broken down in to cities with in Monterey county; Disposal Ton, the amount of waste produced within a city within that time period; Export Ton; Transformation Ton; and Total ADC, ADC stands for alternate daily cover which is material other than soil used to cover a landfill.
 
-    The second data source (broken in to two tables) is from the US Census Bureau QuickFacts table. It contains some estimates from vintage year 2024 and 2025 other years date back to 2010. The Census data is from the 2010 Census of Population and Housing and the 2020 Census of Population and Housing. Other data comes from a variety of sources. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224> and <https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224>. This data is called `QuickFacts Mar-22-2026 (1).csv` and `QuickFacts Mar-22-2026.csv` The data set contains a variety of infromation on people, businesses and geography of cities over 5,000 people in Monterey County, CA. The variables are Fact, which contains the name of the statistic listed; Fact Note; city name for each city, which contains the value for the respective fact; and Value Note for each city.
+    The second data source (broken in to two tables) is from the US Census Bureau QuickFacts table. It contains some estimates from vintage year 2024 and 2025 other years date back to 2010. The Census data is from the 2010 Census of Population and Housing and the 2020 Census of Population and Housing. Other data comes from a variety of sources. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224). This data is called `QuickFacts Mar-22-2026 (1).csv` and `QuickFacts Mar-22-2026.csv` The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA. The variables are Fact, which contains the name of the statistic listed; Fact Note; city name for each city, which contains the value for the respective fact; and Value Note for each city.
 
 ## Data Cleaning
 
@@ -32,6 +33,7 @@ waste_summary_q3 <- read_csv("visualizations-page/data-clean/waste-summary-q3")
 
 ```{r}
 #| label: visualization-q3
+#| include: false
 #making a visualization to answer research question 3
 #storing plot as an object to allow for different looking graphs for different color schemes
 
@@ -54,6 +56,7 @@ Data from CalRecycle",
 ::: light-content
 ```{r}
 #| label: visualization-q3-light
+#| echo: false
 #this will display in light mode
 #https://quarto.org/docs/output-formats/html-themes.html for info on light and dark modes
 
@@ -67,6 +70,7 @@ visualization_q3 +
 ::: dark-content
 ```{r}
 #| label: visualization-q3-dark
+#| echo: false
 #this will display in dark mode
 
 visualization_q3 +
@@ -101,6 +105,7 @@ The Salinas Valley Solid Waste Authority operates in Greenfeild, Gonzales, King 
 
 ```{r}
 #| label: visualization-q1
+#| include: false
 #chose to filter out data after 2013 because some cities stop reporting in 2013
 
 visualization_q1 <- waste_population_q1_q2 |>
@@ -112,7 +117,7 @@ visualization_q1 <- waste_population_q1_q2 |>
              position = position_jitter(height = 0, width = 400)
              ) +
   geom_smooth(method = lm,
-              color = "pink3"
+              color = "red"
               ) +
   labs(title = "Waste Generation per Person based on Population of Cities (1995-2013)",
        x = "Population (April 1, 2010)",
@@ -125,9 +130,10 @@ visualization_q1 <- waste_population_q1_q2 |>
        )
 ```
 
-::: {.light-content}
+::: light-content
 ```{r}
 #| label: visualization-q1-light
+#| echo: false
 # displaying in light mode
 visualization_q1 +
   scale_colour_viridis_d() +
@@ -135,16 +141,16 @@ visualization_q1 +
 ```
 :::
 
-::: {.dark-content}
+::: dark-content
 ```{r}
 #| label: visualization-q1-dark
+#| echo: false
 #this will display in dark mode
 
 visualization_q1 +
   scale_colour_viridis_d() +
   theme_dark(paper = "black", ink = "white")
 ```
-
 :::
 
 Because data for some cities stops and is grouped into The Salinas Valley Solid Waste Authority after 2013 the graph only includes data up to 2013. The box plot shows a slight increase in waste generation per person as population size increases. Population size does not seem to be the only factor affecting waste generation, although there is a slight increase in waste generation per person as population increases.
@@ -153,6 +159,7 @@ Because data for some cities stops and is grouped into The Salinas Valley Solid 
 
 ```{r}
 #| label: visualization-q2
+#| include: false
 #choosing not to include data from after 2013 because Salinas Valley Solid Waste Authority data begins
 
 visualization_q2 <- waste_population_q1_q2 |>
@@ -186,10 +193,10 @@ from 1995 up to 2013.
   annotate("text", x = 7648, y = 0.01, label = "Greenfeild")
 ```
 
-
-::: {.light-content}
+::: light-content
 ```{r}
 #| label: visualization-q12-light
+#| echo: false
 # displaying in light mode
 visualization_q2 +
   scale_colour_viridis_d() +
@@ -197,9 +204,10 @@ visualization_q2 +
 ```
 :::
 
-::: {.dark-content}
+::: dark-content
 ```{r}
 #| label: visualization-q2-dark
+#| echo: false
 #this will display in dark mode
 
 visualization_q2 +
@@ -212,6 +220,7 @@ The graph shows that as population density increases waste disposal per person t
 
 ```{r}
 #| label: box-plot-for-q2
+#| include: false
 # classifying by urban and rural
 
 boxplot_q2 <- waste_population_q1_q2 |>
@@ -236,10 +245,10 @@ boxplot_q2 <- waste_population_q1_q2 |>
   annotate("text", x = 0.2, y = -0.02, label = "more urban")
 ```
 
-
-::: {.light-content}
+::: light-content
 ```{r}
 #| label: boxplot-q2-light
+#| echo: false
 # displaying in light mode
 boxplot_q2 +
   theme_bw() +
@@ -247,16 +256,16 @@ boxplot_q2 +
 ```
 :::
 
-::: {.dark-content}
+::: dark-content
 ```{r}
 #| label: boxplot-q2-dark
+#| echo: false
 #this will display in dark mode
 
 boxplot_q2 +
   theme_dark(paper = "black", ink = "white") +
   scale_color_manual(values = c("blue", "red"))
 ```
-
 :::
-Cities are categorized as more urban or more rural based on the top 5 population densities are the more urban areas and the bottom 4 population densities are the more rural areas. In general for Monterey County the more urban areas have a lower waste generation per person than the more rural areas.
 
+Cities are categorized as more urban or more rural based on the top 5 population densities are the more urban areas and the bottom 4 population densities are the more rural areas. In general for Monterey County the more urban areas have a lower waste generation per person than the more rural areas.

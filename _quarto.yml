@@ -11,7 +11,7 @@ website:
       - href: about.qmd
         text: About
       - href: visualizations-page.qmd
-        text: Waste Visualizations
+        text: Waste Disposal Visualizations
 
 format:
   html:
