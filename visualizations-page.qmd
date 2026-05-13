@@ -4,9 +4,9 @@ title: "Waste Disposal Visualizations"
 
 ## Describing Data
 
-1.  The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. It is found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. This data is called `CountywideSummary.xlsx` The county wide disposal summary for Monterey county contains the variables Report Year; Report Quarter, which lists each of the four quarters of the year and is broken down in to cities with in Monterey county; Disposal Ton, the amount of waste produced within a city within that time period; Export Ton; Transformation Ton; and Total ADC, ADC stands for alternate daily cover which is material other than soil used to cover a landfill.
+    The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. The data set can be found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. The county wide disposal summary for Monterey county contains infromation on disposal amount by year, quarter, and city. The data set also contains data on lanfill cover.
 
-    The second data source (broken in to two tables) is from the US Census Bureau QuickFacts table. It contains some estimates from vintage year 2024 and 2025 other years date back to 2010. The Census data is from the 2010 Census of Population and Housing and the 2020 Census of Population and Housing. Other data comes from a variety of sources. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224). This data is called `QuickFacts Mar-22-2026 (1).csv` and `QuickFacts Mar-22-2026.csv` The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA. The variables are Fact, which contains the name of the statistic listed; Fact Note; city name for each city, which contains the value for the respective fact; and Value Note for each city.
+    The second data source is from the US Census Bureau QuickFacts table. The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA from a variety of scorces. The Census data is from the 2010 Census of Population. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224).
 
 ## Data Cleaning
 
@@ -322,6 +322,7 @@ Because data for some cities stops and is grouped into The Salinas Valley Solid 
 ```{r}
 #| label: visualization-q2
 #| include: false
+#| message: false
 #choosing not to include data from after 2013 because Salinas Valley Solid Waste Authority data begins
 
 visualization_q2 <- waste_population_q1_q2 |>
@@ -425,7 +426,7 @@ boxplot_q2 +
 #this will display in dark mode
 
 boxplot_q2 +
-  theme_dark(paper = "black", ink = "white") +
+  theme_grey(paper = "black", ink = "white") +
   scale_color_manual(values = c("blue", "red"))
 ```
 :::
