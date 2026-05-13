@@ -261,7 +261,7 @@ filter(time == 2013)
 
 In 2013 data for Gonzales, Greenfeild, King City, Salinas, and Soledad is no longer reported and data for the Salinas Valley Solid Waste Authority begins.
 
-The Salinas Valley Solid Waste Authority operates in Greenfeild, Gonzales, King City, Salinas, Soledad, and part of unincorporated Monterey County. (Salinas Valley Solid Waste Authority) <https://svswa.org/government/formation-service-area/>
+The Salinas Valley Solid Waste Authority operates in Greenfeild, Gonzales, King City, Salinas, Soledad, and part of unincorporated Monterey County. [Salinas Valley Solid Waste Authority](https://svswa.org/government/formation-service-area/)
 
 ### How does population size of a city, for cities over 5000 people, affect waste generation per person in Monterey county?
 
@@ -319,7 +319,7 @@ visualization_q1 +
 ```
 :::
 
-Because data for some cities stops and is grouped into The Salinas Valley Solid Waste Authority after 2013 the graph only includes data up to 2013. The box plot shows a slight increase in waste generation per person as population size increases. Population size does not seem to be the only factor affecting waste generation, although there is a slight increase in waste generation per person as population increases.
+The box plot shows a slight increase in waste generation per person as population size increases. Because data for some cities stops and is grouped into The Salinas Valley Solid Waste Authority after 2013 the graph only includes data up to 2013.
 
 ### How does population size per square mile affect waste generation per person for cities over 5000 people in Monterey County?
 
@@ -357,7 +357,7 @@ from 1995 up to 2013.
   annotate("text", x = 5250, y = 0.35, label = "Pacific Grove") +
   annotate("text", x = 5831, y = 0.01, label = "Soledad") +
   annotate("text", x = 6490, y = 0.35, label = "Salinas") +
-  annotate("text", x = 7648, y = 0.01, label = "Greenfeild")
+  annotate("text", x = 7600, y = 0.01, label = "Greenfeild")
 ```
 
 ::: light-content
@@ -437,4 +437,4 @@ boxplot_q2 +
 ```
 :::
 
-Cities are categorized as more urban or more rural based on the top 5 population densities are the more urban areas and the bottom 4 population densities are the more rural areas. In general for Monterey County the more urban areas have a lower waste generation per person than the more rural areas.
+In general for Monterey County the more urban areas have a lower waste generation per person than the more rural areas. Cities are categorized as more urban or more rural based on the top 5 population densities are the more urban areas and the bottom 4 population densities are the more rural areas.
