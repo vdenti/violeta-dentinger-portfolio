@@ -4,9 +4,9 @@ title: "Waste Disposal Visualizations"
 
 ## Describing Data
 
-    The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. The data set can be found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. The county wide disposal summary for Monterey county contains infromation on disposal amount by year, quarter, and city. The data set also contains data on lanfill cover.
+  The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. The data set can be found [here](https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary) on Cal Recycle's website. The county wide disposal summary for Monterey county contains infromation on disposal amount by year, quarter, and city. The data set also contains data on lanfill cover.
 
-    The second data source is from the US Census Bureau QuickFacts table. The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA from a variety of scorces. The Census data is from the 2010 Census of Population. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224).
+  The second data source is from the US Census Bureau QuickFacts table. The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA from a variety of scorces. The Census data is from the 2010 Census of Population. All data was accessed on March 22, 2026. It can be found at <https://www.census.gov/quickfacts/fact/table> or specifically [here](https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224) and [here](https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224).
 
 ## Data Cleaning
 
@@ -268,6 +268,7 @@ The Salinas Valley Solid Waste Authority operates in Greenfeild, Gonzales, King 
 ```{r}
 #| label: visualization-q1
 #| include: false
+#| message: false
 #chose to filter out data after 2013 because some cities stop reporting in 2013
 
 visualization_q1 <- waste_population_q1_q2 |>
@@ -296,6 +297,8 @@ visualization_q1 <- waste_population_q1_q2 |>
 ```{r}
 #| label: visualization-q1-light
 #| echo: false
+#| message: false
+
 # displaying in light mode
 visualization_q1 +
   scale_colour_viridis_d() +
@@ -307,6 +310,7 @@ visualization_q1 +
 ```{r}
 #| label: visualization-q1-dark
 #| echo: false
+#| message: false
 #this will display in dark mode
 
 visualization_q1 +
@@ -360,6 +364,7 @@ from 1995 up to 2013.
 ```{r}
 #| label: visualization-q12-light
 #| echo: false
+#| message: false
 # displaying in light mode
 visualization_q2 +
   scale_colour_viridis_d() +
@@ -371,6 +376,7 @@ visualization_q2 +
 ```{r}
 #| label: visualization-q2-dark
 #| echo: false
+#| message: false
 #this will display in dark mode
 
 visualization_q2 +

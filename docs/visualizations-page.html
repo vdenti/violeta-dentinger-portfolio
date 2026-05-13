@@ -332,10 +332,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="describing-data" class="level2">
 <h2 class="anchored" data-anchor-id="describing-data">Describing Data</h2>
-<ol type="1">
-<li><p>The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. It is found <a href="https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary">here</a> on Cal Recycle’s website. This data is called <code>CountywideSummary.xlsx</code> The county wide disposal summary for Monterey county contains the variables Report Year; Report Quarter, which lists each of the four quarters of the year and is broken down in to cities with in Monterey county; Disposal Ton, the amount of waste produced within a city within that time period; Export Ton; Transformation Ton; and Total ADC, ADC stands for alternate daily cover which is material other than soil used to cover a landfill.</p>
-<p>The second data source (broken in to two tables) is from the US Census Bureau QuickFacts table. It contains some estimates from vintage year 2024 and 2025 other years date back to 2010. The Census data is from the 2010 Census of Population and Housing and the 2020 Census of Population and Housing. Other data comes from a variety of sources. All data was accessed on March 22, 2026. It can be found at <a href="https://www.census.gov/quickfacts/fact/table" class="uri">https://www.census.gov/quickfacts/fact/table</a> or specifically <a href="https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224">here</a> and <a href="https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224">here</a>. This data is called <code>QuickFacts Mar-22-2026 (1).csv</code> and <code>QuickFacts Mar-22-2026.csv</code> The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA. The variables are Fact, which contains the name of the statistic listed; Fact Note; city name for each city, which contains the value for the respective fact; and Value Note for each city.</p></li>
-</ol>
+<p>The first data set is from Cal Recycle and is the Multi-Year County Wide Origin Summary for Monterey. The data set can be found <a href="https://www2.calrecycle.ca.gov/LGCentral/DisposalReporting/Origin/CountywideSummary">here</a> on Cal Recycle’s website. The county wide disposal summary for Monterey county contains infromation on disposal amount by year, quarter, and city. The data set also contains data on lanfill cover.</p>
+<p>The second data source is from the US Census Bureau QuickFacts table. The data set contains a variety of information on people, businesses and geography of cities over 5,000 people in Monterey County, CA from a variety of scorces. The Census data is from the 2010 Census of Population. All data was accessed on March 22, 2026. It can be found at <a href="https://www.census.gov/quickfacts/fact/table" class="uri">https://www.census.gov/quickfacts/fact/table</a> or specifically <a href="https://www.census.gov/quickfacts/fact/table/pacificgrovecitycalifornia,montereycitycalifornia,marinacitycalifornia,kingcitynorthcarolina,greenfieldcitycalifornia,gonzalescitycalifornia/PST045224">here</a> and <a href="https://www.census.gov/quickfacts/fact/table/soledadcitycalifornia,seasidecitycalifornia,salinascitycalifornia/PST045224">here</a>.</p>
 </section>
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
@@ -375,9 +373,6 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="how-does-population-size-of-a-city-for-cities-over-5000-people-affect-waste-generation-per-person-in-monterey-county">How does population size of a city, for cities over 5000 people, affect waste generation per person in Monterey county?</h3>
 <div class="light-content">
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -389,9 +384,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="dark-content">
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -407,9 +399,6 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="how-does-population-size-per-square-mile-affect-waste-generation-per-person-for-cities-over-5000-people-in-monterey-county">How does population size per square mile affect waste generation per person for cities over 5000 people in Monterey County?</h3>
 <div class="light-content">
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -421,9 +410,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="dark-content">
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
